@@ -117,7 +117,10 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   height: 36px;
   display: flex;
   align-items: center;
-  position: relative;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
   z-index: 1001;
 }
 .tbt { display: flex; animation: mq 25s linear infinite; }
@@ -136,13 +139,18 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 
 /* ═══════════ HEADER ═══════════ */
 .hd {
-  position: sticky;
-  top: 0;
+  position: fixed;
+  top: 36px;
+  left: 0;
+  right: 0;
   z-index: 1000;
-  background: rgba(13, 27, 38, 0.85);
-  backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(13, 27, 38, 0.55);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
   padding: 0 24px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
 }
 .hdi {
   max-width: 1280px;
@@ -155,7 +163,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 .hdi .logo img { height: 32px; }
 .hn { display: flex; align-items: center; gap: 28px; list-style: none; }
 .hn a {
-  font-size: 0.88rem;
+  font-size: 1rem;
   font-weight: 500;
   color: var(--gyl);
   transition: var(--tr);
@@ -182,7 +190,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   padding: 10px 22px;
   border-radius: 50px;
   font-weight: 700;
-  font-size: 0.88rem;
+  font-size: 0.95rem;
   transition: var(--tr);
   box-shadow: 0 0 20px rgba(240, 194, 74, 0.25);
 }
@@ -229,19 +237,19 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 /* ═══════════ HERO ═══════════ */
 .hero {
   position: relative;
-  min-height: calc(100vh - 108px);
+  min-height: 100vh;
   display: flex;
   align-items: center;
   overflow: hidden;
-  padding: 60px 0 40px;
+  padding: 140px 0 40px;
 }
 .hbg { position: absolute; inset: 0; z-index: 0; }
-.hbg img { width: 100%; height: 100%; object-fit: cover; opacity: 0.3; filter: brightness(0.5); }
+.hbg img { width: 100%; height: 100%; object-fit: cover; opacity: 0.45; filter: brightness(0.6) saturate(0.8); }
 .hbg::after {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, var(--d1) 0%, rgba(13,27,38,0.6) 40%, rgba(13,27,38,0.8) 70%, var(--d1) 100%);
+  background: linear-gradient(180deg, var(--d1) 0%, rgba(13,27,38,0.45) 35%, rgba(13,27,38,0.65) 65%, var(--d1) 100%);
 }
 #gc {
   position: absolute; inset: 0;
@@ -490,8 +498,8 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 }
 .mql { text-align: center; font-size: 0.75rem; color: var(--gy); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 16px; }
 .mqt { display: flex; animation: sl 20s linear infinite; width: fit-content; }
-.mqt img { height: 28px; margin: 0 40px; opacity: 0.5; filter: brightness(0) invert(1); transition: opacity 0.3s; }
-.mqt img:hover { opacity: 0.9; }
+.mqt img { height: 28px; margin: 0 40px; opacity: 0.6; filter: brightness(0) invert(0.85); transition: opacity 0.3s; }
+.mqt img:hover { opacity: 1; filter: brightness(0) invert(1); }
 @keyframes sl { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
 
@@ -527,13 +535,13 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   min-height: 80px;
 }
 .fc:hover { border-color: var(--g); background: rgba(240,194,74,0.06); transform: translateY(-4px); }
-.fc img { max-height: 32px; filter: brightness(0) invert(0.7); transition: var(--tr); }
+.fc img { max-height: 32px; filter: brightness(0) invert(0.85); transition: var(--tr); }
 .fc:hover img { filter: brightness(0) invert(1); }
 
 
 /* ═══════════ PLATFORM ═══════════ */
 .plts { padding: 100px 0; overflow: hidden; }
-.pltg { display: grid; grid-template-columns: 1fr 1.2fr; gap: 60px; align-items: center; }
+.pltg { display: grid; grid-template-columns: 1fr 1.2fr; gap: 60px; align-items: start; }
 .phw { display: flex; justify-content: center; }
 .phw img { max-height: 560px; filter: drop-shadow(0 30px 60px rgba(0,0,0,0.5)); animation: fl 6s ease-in-out infinite; }
 @keyframes fl { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
@@ -1196,7 +1204,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 @media (max-width: 768px) {
   .hn { display: none; }
   .mt { display: flex; }
-  .hero { min-height: auto; padding: 40px 0; }
+  .hero { min-height: auto; padding: 130px 0 40px; }
   .ht { font-size: 1.8rem; }
   .pw { padding: 20px; }
   .cn { font-size: 1.4rem; }
