@@ -76,16 +76,64 @@ function toggleFaq(btn) {
 window.tfaq = toggleFaq;
 
 
-// ═══════════ TABS ═══════════
+// ═══════════ TABS + PHONE SCREEN SYNC ═══════════
+const appScreenMap = { home: 'tf', orders: 'th', marketplace: 'tm' };
+const appScreens = ['home', 'orders', 'marketplace'];
+
+function switchAppScreen(screenId) {
+  var current = document.querySelector('.app-demo .scr.active');
+  var next = document.getElementById('app-' + screenId);
+  if (!current || !next || current === next) return;
+  current.classList.add('exit');
+  current.classList.remove('active');
+  setTimeout(function() {
+    current.classList.remove('exit');
+    next.classList.add('active');
+  }, 50);
+  // Update phone tabs
+  document.querySelectorAll('.app-demo .tab').forEach(function(t) { t.classList.remove('on'); });
+  var phoneTab = document.querySelector('[data-app-screen="' + screenId + '"]');
+  if (phoneTab) phoneTab.classList.add('on');
+}
+
 function switchTab(btn, id) {
-  document.querySelectorAll('.ptb').forEach(b => b.classList.remove('act'));
-  document.querySelectorAll('.tc').forEach(c => c.classList.remove('act'));
+  document.querySelectorAll('.ptb').forEach(function(b) { b.classList.remove('act'); });
+  document.querySelectorAll('.tc').forEach(function(c) { c.classList.remove('act'); });
   btn.classList.add('act');
   document.getElementById(id).classList.add('act');
+  // Switch phone screen
+  var phoneScreen = btn.dataset.phone;
+  if (phoneScreen) switchAppScreen(phoneScreen);
 }
 
 // Make global for onclick
 window.stab = switchTab;
+
+function initPhoneTabs() {
+  document.querySelectorAll('.app-demo .tab').forEach(function(tab) {
+    tab.addEventListener('click', function() {
+      var screenId = tab.dataset.appScreen;
+      if (appScreens.indexOf(screenId) !== -1) {
+        switchAppScreen(screenId);
+        // Sync section tabs
+        var tabId = appScreenMap[screenId];
+        if (tabId) {
+          var sectionBtn = document.querySelector('.ptb[data-phone="' + screenId + '"]');
+          if (sectionBtn) {
+            document.querySelectorAll('.ptb').forEach(function(b) { b.classList.remove('act'); });
+            document.querySelectorAll('.tc').forEach(function(c) { c.classList.remove('act'); });
+            sectionBtn.classList.add('act');
+            document.getElementById(tabId).classList.add('act');
+          }
+        }
+      } else {
+        // Wallet/Chat - just highlight the phone tab
+        document.querySelectorAll('.app-demo .tab').forEach(function(t) { t.classList.remove('on'); });
+        tab.classList.add('on');
+      }
+    });
+  });
+}
 
 
 // ═══════════ ANIMATED COUNTER ═══════════
@@ -235,4 +283,5 @@ document.addEventListener('DOMContentLoaded', () => {
   initStickyBar();
   initGlobe();
   initCounters();
+  initPhoneTabs();
 });
