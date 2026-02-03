@@ -160,6 +160,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   justify-content: space-between;
   height: 72px;
 }
+.hdi .logo { flex-shrink: 0; }
 .hdi .logo img { height: 32px; }
 .hn { display: flex; align-items: center; gap: 28px; list-style: none; }
 .hn a {
@@ -1227,6 +1228,8 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 @media (max-width: 768px) {
   .hn { display: none; }
   .mt { display: flex; }
+  .hdi .bw { padding: 8px 14px; font-size: 0.82rem; }
+  .hdi .bw svg { width: 14px; height: 14px; }
   .hero { min-height: auto; padding: 130px 0 40px; }
   .ht { font-size: 1.8rem; }
   .pw { padding: 20px; }
@@ -1249,4 +1252,9 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   .ht { font-size: 1.5rem; }
   .cn { font-size: 1.2rem; }
   .ptn { font-size: 1.2rem; }
+  .hdi .bw { padding: 7px 12px; font-size: 0.75rem; gap: 5px; }
+}
+
+@media (max-width: 360px) {
+  .hdi .bw { padding: 6px 10px; font-size: 0.7rem; }
 }
